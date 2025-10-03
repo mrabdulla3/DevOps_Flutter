@@ -1,14 +1,17 @@
-# Use official Flutter image as base
-FROM cirrusci/flutter:stable
+# Use official lightweight Flutter image
+FROM ghcr.io/cirruslabs/flutter:3.24.3
 
-# Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy project files into container
-COPY . .
+# Copy only pubspec first (to cache dependencies)
+COPY pubspec.* ./
 
-# Get Flutter dependencies
+# Get dependencies
 RUN flutter pub get
 
-# Run tests (optional for build image, you can also run this in Jenkins pipeline)
+# Copy rest of the app
+COPY . .
+
+# Default command: run tests
 CMD ["flutter", "test"]
