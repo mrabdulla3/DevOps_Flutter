@@ -1,0 +1,33 @@
+pipeline{
+    agent any
+
+    stages{
+
+        stage('Clone Git Repo'){
+            steps{
+                script{
+                    def gitUrl=''
+
+                    checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[
+                        url: gitUrl,
+                    ]]
+                ])
+                }
+
+            }
+
+        }
+
+        stage('build'){
+            steps{
+                sh '''
+                ls
+                echo "This is build section"
+                '''
+            }
+
+        }
+    }
+}
