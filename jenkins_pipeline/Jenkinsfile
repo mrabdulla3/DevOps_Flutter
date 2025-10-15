@@ -30,7 +30,6 @@ pipeline{
         }
 
         stage('build'){
-            steps{
                 parallel{
                     stage('Stage-1'){
                         steps{
@@ -48,7 +47,6 @@ pipeline{
                             echo "Parallel stage 3"
                         }
                     }
-                }
             }
 
         }
