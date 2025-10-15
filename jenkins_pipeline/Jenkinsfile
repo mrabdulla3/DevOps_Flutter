@@ -6,7 +6,7 @@ pipeline{
         stage('Clone Git Repo'){
             steps{
                 script{
-                    def gitUrl=''
+                    def gitUrl='https://github.com/mrabdulla3/DevOps_Flutter.git'
 
                     checkout([$class: 'GitSCM', 
                     branches: [[name: '*/main']],
