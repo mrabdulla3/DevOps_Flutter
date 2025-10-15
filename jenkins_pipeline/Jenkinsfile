@@ -19,6 +19,11 @@ pipeline{
             }
 
         }
+        stage('Get Dependencies'){
+            steps{
+                sh 'flutter pub get'
+            }
+        }
 
         stage('build'){
             steps{
