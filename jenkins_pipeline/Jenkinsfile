@@ -46,10 +46,11 @@ pipeline{
                 parameters{
                     string(name:'TARGET_ENVIRONMENT',defaultValue: 'empty',description : 'Target Environment Variable')
                 }
-                steps{
+               
+            }
+             steps{
                     echo "Deployed ${TARGET_ENVIRONMENT}"
                 }
-            }
         }
     }
 }
