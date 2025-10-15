@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     environment{
-                PATH = "/opt/flutter/bin:${PATH}"
+        PATH = "/opt/flutter/bin:${PATH}"
     }
 
     stages{
@@ -37,6 +37,19 @@ pipeline{
                 '''
             }
 
+        }
+
+        stage('Deploy'){
+            input{
+                message 'Deploy?',
+                ok 'Do it'
+                parameters{
+                    string(name:'TARGET_ENVIRONMENT',defaultValue: 'empty',description : 'Target Environment Variable')
+                }
+                steps{
+                    echo "Deployed ${TARGET_ENVIRONMENT}"
+                }
+            }
         }
     }
 }
