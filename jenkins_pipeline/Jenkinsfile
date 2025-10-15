@@ -31,10 +31,24 @@ pipeline{
 
         stage('build'){
             steps{
-                sh '''
-                ls
-                echo "This is build section"
-                '''
+                parallel{
+                    stage('Stage-1'){
+                        steps{
+                            echo "Parallel stage 1"
+                        }
+                    }
+
+                     stage('Stage-2'){
+                        steps{
+                            echo "Parallel stage 2"
+                        }
+                    }
+                     stage('Stage-3'){
+                        steps{
+                            echo "Parallel stage 3"
+                        }
+                    }
+                }
             }
 
         }
