@@ -1,0 +1,69 @@
+pipeline{
+    agent any
+
+    environment{
+        PATH = "/opt/flutter/bin:${PATH}"
+    }
+
+    stages{
+
+        stage('Clone Git Repo'){
+            steps{
+                script{
+                    def gitUrl='https://github.com/mrabdulla3/DevOps_Flutter.git'
+
+                    checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[
+                        url: gitUrl,
+                    ]]
+                ])
+                }
+
+            }
+
+        }
+        stage('Get Dependencies'){
+            steps{
+                sh 'flutter pub get'
+            }
+        }
+
+        stage('build'){
+               steps{
+                commands()
+               }
+
+        }
+
+        stage('Deploy'){
+            input{
+                message 'Deploy?'
+                ok 'Do it'
+                parameters{
+                    string(name:'TARGET_ENVIRONMENT',defaultValue: 'empty',description : 'Target Environment Variable')
+                }
+               
+            }
+             steps{
+                    echo "Deployed ${TARGET_ENVIRONMENT}"
+                }
+        }
+
+    //    stage('Publish') {
+    //         steps {
+    //             archiveArtifacts artifacts: '**/*.xml', fingerprint: true
+    //         }
+    //     }
+    }
+}
+
+
+void commands(){
+    sh '''
+    flutter clean
+    flutter pub get
+    flutter --version
+    flutter build apk --release
+    '''
+}
