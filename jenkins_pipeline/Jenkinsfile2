@@ -64,6 +64,5 @@ void commands(){
     flutter clean
     flutter pub get
     flutter --version
-    flutter build apk --release
     '''
 }
