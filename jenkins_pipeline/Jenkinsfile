@@ -67,7 +67,7 @@ pipeline{
 
        stage('Publish') {
             steps {
-                archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/app-release.apk', fingerprint: true
+                archiveArtifacts artifacts: '**/*.xml', fingerprint: true
             }
         }
     }
