@@ -33,12 +33,6 @@ pipeline{
             }
         }
 
-        stage('build'){
-               steps{
-                 sh 'flutter pub get'
-               }
-
-        }
 
         stage('Deploy'){
             input{
