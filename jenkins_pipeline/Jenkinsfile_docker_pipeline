@@ -7,7 +7,6 @@ pipeline{
 
     environment{
         PATH = "/opt/flutter/bin:${PATH}"
-        DOCKER_HOME="/usr/bin/docker"
     }
 
     stages{
